@@ -1,0 +1,133 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Project 2</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
+</head>
+
+<body>
+    <div id="container">
+        <div onclick="openNav()" id="header">
+            <img id="background" src="images/background.jpg" />
+            <div id="titleDiv"><h1 id="title">Introduction<br /> to Go</h1>
+                               <h1 id="shadow">Introduction<br /> to Go</h1></div>
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <div id="footer">
+                <p class="copy">Copyright &copy; 2017 Jialuo Gao</p>
+            </div>
+            <div onmouseover="move()" onmouseout="moveback()" onclick="openNav()" 
+                 class="main event" style="font-size:4em;cursor:pointer;position:center">&#8593;&#8593;&#8593; </div>
+            <div onmouseover="move()" onmouseout="moveback()" onclick="closeNav()" 
+                 class="main event" style="font-size:4em;cursor:pointer;position:center">&#8595;&#8595;&#8595;</div>
+            
+                <div id="menu">
+                    <div id="step1" class="rectangle white" onmouseover="shade(1)" onmouseout="unshade(1)" onclick="currentDiv(1)">DEMO1</div>
+                    <div id="step2" class="rectangle white" onmouseover="shade(2)" onmouseout="unshade(2)" onclick="currentDiv(2)">DEMO2</div>
+                    <div id="step3" class="rectangle white" onmouseover="shade(3)" onmouseout="unshade(3)" onclick="currentDiv(3)">DEMO3</div>
+                    <div id="step4" class="rectangle white" onmouseover="shade(4)" onmouseout="unshade(4)" onclick="currentDiv(4)">DEMO4</div>
+                    <div id="step5" class="rectangle white" onmouseover="shade(5)" onmouseout="unshade(5)" onclick="currentDiv(5)">DEMO5</div>
+                    <div id="step6" class="rectangle white" onmouseover="shade(6)" onmouseout="unshade(6)" onclick="currentDiv(6)">DEMO6</div>
+                    <div id="step7" class="rectangle white" onmouseover="shade(7)" onmouseout="unshade(7)" onclick="currentDiv(7)">DEMO7</div>
+                </div>
+            <div id="content" class="white">
+                <div class="mySlides firstSlide">1</div>
+                <div class="mySlides">2</div>
+                <div class="mySlides">3</div>
+                <div class="mySlides">4</div>
+                <div class="mySlides">5</div>
+                <div class="mySlides">6</div>
+                <div class="mySlides">7</div>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>
+
+<script>
+    var events = document.getElementsByClassName("event");
+    window.onload = set;
+    function set(){
+        events[1].style.display = "none";
+        showDivs(slideIndex);
+       
+    }
+    var html = document.documentElement;
+    var height = html.clientHeight * 0.21;
+    function openNav() {
+        document.getElementById("mySidenav").style.height = "90%";
+        document.getElementById("mySidenav").style.top = "10%";
+        document.getElementById("background").style.filter += "blur(10px) grayscale(100%)";
+        document.getElementById("header").addEventListener("click", closeNav);
+        document.getElementById("header").removeEventListener("click", openNav);
+        document.getElementById("menu").style.top = height+"px";
+        events[0].style.display = "none";
+        events[1].style.display = "block";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.height = "20%";
+        document.getElementById("mySidenav").style.top = "80%";
+        document.getElementById("background").style.filter = "invert(20%)";
+        document.getElementById("header").addEventListener("click", openNav);
+        document.getElementById("header").removeEventListener("click", closeNav);
+        document.getElementById("menu").style.top = height+"px";
+        events[0].style.display = "block";
+        events[1].style.display = "none";
+    }
+
+    function shade(n) {
+        document.getElementById("step"+n).style.filter = "blur(5px) grayscale(50%)";
+    }
+    var check = [true,true,true,true,true,true,true];
+    function unshade(n) {
+        if(check[n-1])
+            document.getElementById("step" + n).style.filter = "none";
+    }
+
+    function move() {
+        document.getElementsByClassName("main")[0].style.marginTop = "0";
+        document.getElementsByClassName("main")[0].style.marginBottom = "1%";
+        document.getElementsByClassName("main")[1].style.marginTop = "2%";
+        document.getElementsByClassName("main")[1].style.marginBottom = "0";
+    }
+    function moveback() {
+        document.getElementsByClassName("main")[0].style.marginTop = "1%";
+        document.getElementsByClassName("main")[0].style.marginBottom = "0";
+        document.getElementsByClassName("main")[1].style.marginTop = "1%";
+        document.getElementsByClassName("main")[1].style.marginBottom = "1%";
+    }
+
+
+    var slideIndex = 1;
+    
+
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+        var i;
+ 
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 1; i <= check.length; i++) {
+            check[i - 1] = true;
+            unshade(i);
+//          document.getElementById("title").innerHTML = ;
+        }
+
+        x[slideIndex - 1].style.display = "block";
+        shade(n);
+        check[n-1] = false;
+    }
+</script>
