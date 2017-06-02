@@ -3,11 +3,28 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
 }
 
+span {
+    vertical-align: middle;
+}
 .white {
     text-align: center;
-    font-size: 2em;
+    font-weight: bold;
+    font-size: 2.2em;
+    line-height:30px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    color:white
+    color: white
+}
+.small-white {
+    text-align: center;
+    line-height: 30px;
+    font-size: 1.4em;
+    font-weight: bold;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white
+}
+
+.arrow{
+    height:100px;
 }
 
 body{
@@ -63,6 +80,7 @@ body {
     width: 1.7em;
     transition: 0.3s;
     margin-top: 1%;
+    margin-bottom:1%;
     margin-left: auto;
     margin-right: auto;
     text-align: center;
@@ -76,11 +94,10 @@ body {
 }
 
 #menu{
-    top:100%;
-    float: left;
     height: 70%;
     width:20%;
     margin-left:2%;
+    margin-top:1%;
     position:absolute;
     transition:0.3s;
 }
@@ -95,11 +112,72 @@ body {
     cursor: pointer
 }
 
-.mySlides{
-    margin:auto;
-    display:none;
+#content {
+    height: 70%;
+    width: 70%;
+    margin-left: 26%;
+    margin-top:2.5%;
+    position: absolute;
 }
-
-.firstSlide{
-    display:block;
+.show {
+    border-style: solid;
+    color: white;
+}
+.general{
+    width:45%;
+    height:auto;
+    margin-top:4%;
+}
+#p1 {
+    font-size: 0.8em;
+    line-height: 1.3em;
+    text-align:left;
+}
+#p2 {
+    font-size: 0.73em;
+    line-height: 1.3em;
+    text-align: left;
+}
+#p3-1 {
+    font-size: 0.7em;
+    line-height: 1em;
+    text-align: left;
+}
+.p3-2 {
+    font-size: 0.6em;
+    line-height: 1.3em;
+    text-align: left;
+}
+p:before {
+    content: "\00a0 \00a0 \00a0 \00a0 \00a0 ";
+}
+p.none:before{
+    content:none;
+}
+.smallest-white {
+    text-align: center;
+    line-height: 18px;
+    font-size: 15px;
+    font-weight: 300;
+    font-family: 'Times New Roman', Times, serif;
+    color: white
+}
+.smallest-white-2 {
+    text-align: center;
+    line-height: 30px;
+    font-size: 25px;
+    font-weight: 400;
+    font-family: 'Times New Roman', Times, serif;
+    color: white
+}
+.general-small {
+    width: 25%;
+    height: auto;
+    margin-left:3%;
+}
+.line-space{
+    line-height:5em;
+    font-size:0.7em;
+    color:white;
+    text-align:left;
 }
