@@ -1,0 +1,207 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Project 2</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
+</head>
+
+<body>
+    <div id="container">
+        <div onclick="openNav()" id="header">
+            <img id="background" src="images/background.jpg" />
+            <div id="titleDiv"><h1 id="title">Introduction<br /> to Go</h1>
+                               <h1 id="shadow">Introduction<br /> to Go</h1></div>
+        </div>
+
+        <div id="mySidenav" class="sidenav">
+            <div id="footer">
+                <p class="copy">Copyright &copy; 2017 Jialuo Gao</p>
+            </div>
+            <div onmouseover="move()" onmouseout="moveback()" onclick="openNav()" 
+                 class="main event" style="font-size:4em;cursor:pointer;position:center"><img class="arrow" src="images/arrow.png" /></div>
+            <div onmouseover="move()" onmouseout="moveback()" onclick="closeNav()"
+                 class="main event" style="font-size:4em;cursor:pointer;position:center"><img class="arrow" src="images/arrowDown.png" /></div>
+            
+                <div id="menu">
+                    <div id="step1" class="rectangle white" onmouseover="shade(1)" onmouseout="unshade(1)" onclick="currentDiv(1)"><span>General</span></div>
+                    <div id="step2" class="rectangle white" onmouseover="shade(2)" onmouseout="unshade(2)" onclick="currentDiv(2)"><span>Process</span></div>
+                    <div id="step3" class="rectangle small-white" onmouseover="shade(3)" onmouseout="unshade(3)" onclick="currentDiv(3)"><span>Territory & Capture</span></div>
+                    <div id="step4" class="rectangle white" onmouseover="shade(4)" onmouseout="unshade(4)" onclick="currentDiv(4)"><span>Connections</span></div>
+                    <div id="step5" class="rectangle white" onmouseover="shade(5)" onmouseout="unshade(5)" onclick="currentDiv(5)"><span>Eyes</span></div>
+                    <div id="step6" class="rectangle white" onmouseover="shade(6)" onmouseout="unshade(6)" onclick="currentDiv(6)"><span>Ko</span></div>
+                    <div id="step7" class="rectangle white" onmouseover="shade(7)" onmouseout="unshade(7)" onclick="currentDiv(7)"><span>Read More</span></div>
+                </div>
+            <div id="content" class="white ">
+                <div class="mySlides">
+                    <div style="width:50%;height:70%;float:left"><p id="p1">The board used to play Go is a board with a 19×19 grid of lines. Beginners often play on smaller boards including 9×9 and 13×13 boards. The game is played by placing the playing pieces called stones on empty intersections of the lines that called points. There are two colors of stones, black and white, used by two players respectively.</p></div>
+                    <div><img class="general"src="images/board.jpg" /></div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:50%;height:70%;float:left"><p id="p2">Starting from an empty board, the black player moves first; then players take turns to play. At any time a player may pass (skip their round). When both players have passed, the game is finished. The objective of Go is to fully surround a larger total area of the board than the opponent. At the end of the game, the player with the higher points wins. Points are gained in the following ways: surrounding territory and capturing the opponent's stones. </p></div>
+                    <div><img class="general" src="images/playGo.jpg" /></div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:50%;height:70%;float:left">
+                        <div><p id="p3-1">The territory is empty spaces that are surrounded completely by stones of the same color and the edge of the board. Each space counts as one point.</p></div>
+                        <div style="width:49%;height:70%;float:left">
+                            <img src="images/territory1.jpg" />
+                            <p class="none smallest-white">
+                                Top half is black territory;<br/>
+                                Bottom half is white territory
+                            </p>
+                        </div>
+                        <div style="width:49%;height:70%;float:right">
+                            <p class="none smallest-white">
+                                Right half is black territory;<br />
+                                Left half is white territory
+                            </p>
+                            <img src="images/territory2.jpg" />
+                        </div>
+                    </div>
+                    <div style="width:50%;height:70%;float:right;">
+                        <div style="float:left;width:60%;padding-right:2%;" >
+                            <img src="images/capture.jpg" style="width:100%;margin-top:10%" />
+                            <p class="none smallest-white">
+                                Examples of capturing
+                            </p>
+                        </div>
+                        <div><p class="p3-2">Players can capture their opponent's stones by filling all the adjacent points around them. The captured stones are removed from the board and kept by the player who captured them, which is later counted as a win condition.</p></div>
+                    </div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:60%;height:70%;float:left;padding-left:2.5%;padding-right:2.5%;"><p id="p2">Stones of the same color on immediately adjacent points are said to be connected or joined. The connection can be horizontal or vertical, but not diagonal - the connection is along the lines. When vertical or horizontal connections are formed, they have to be captured as a whole; they can not be captured separately.</p></div>
+                    <div style="width:35%;height:70%;float:right">
+                        <img class="general" src="images/connection.jpg" style="width:100%;height:auto"/>
+                        <p class="none smallest-white">
+                            Black stones are connected;<br/>
+                            White stones are not connected
+                        </p>
+                    </div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:100%;height:40%"><p class="p3-2">For a group of stones to be captured, all the intersections touching the group must be filled. The group must not only be surrounded on the outside, but empty spaces inside the group adjacent to the stones must also be filled.(graph 1) A single empty space inside a group is called an eye.(graph 2) Indeed, by the end of the game, for a group to remain alive it must contain at least two eyes.(graph 3)</p></div>
+                    <div style="width:100%">
+                        <img class="general-small" src="images/eye1.jpg" />
+                        <img class="general-small" src="images/eye2.jpg" />
+                        <img class="general-small" src="images/eye3.jpg" />
+                    </div>
+                    <div style="width:80%;margin-left:12%"><p class="none smallest-white">Graph 1 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                                                      Graph 2 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                                                      Graph 3</p> </div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:40%;height:70%;float:left"><p id="p2">When a stone making a capture is vulnerable to being recaptured immediately, the situation is called a ko. In a ko, if one side captures, the other side may not recapture immediately but must wait at least one move to recapture.</p></div>
+                    <div style="float:left;width:30%;margin-top:5%"> 
+                        <img style="width:95%"class="general-small" src="images/Goko.gif"/>
+                        <p class="none smallest-white-2">
+                            Example of Ko
+                        </p>
+                    </div>
+                    <div style="float:right;width:30%;margin-top:1%;">
+                        <p class="none smallest-white-2">
+                            The right way to play <br/>
+                            under rules
+                        </p>
+                        <img style="width:85%"class="general-small" src="images/Goko3.gif" />
+                    </div>
+                </div>
+                <div class="mySlides">
+                    <div>
+                        <ul class="line-space">
+                            <li><a href="https://www.pandanet.co.jp/English/learning_go/learning_go_1.html">https://www.pandanet.co.jp/English/learning_go/learning_go_1.html</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/Go_(game)">https://en.wikipedia.org/wiki/Go_(game)</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=JWdgqV-8yVg">https://www.youtube.com/watch?v=JWdgqV-8yVg</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
+</body>
+</html>
+
+<script>
+    var events = document.getElementsByClassName("event");
+    window.onload = set;
+    function set(){
+        events[1].style.display = "none";
+        showDivs(slideIndex);  
+    }
+    var html = document.documentElement;
+    var height = html.clientHeight * 0.21;
+    function openNav() {
+        document.getElementById("mySidenav").style.height = "90%";
+        document.getElementById("mySidenav").style.top = "10%";
+        document.getElementById("background").style.filter += "blur(10px) grayscale(100%)";
+        document.getElementById("header").addEventListener("click", closeNav);
+        document.getElementById("header").removeEventListener("click", openNav);
+        document.getElementById("menu").style.top = height+"px";
+        events[0].style.display = "none";
+        events[1].style.display = "block";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.height = "20%";
+        document.getElementById("mySidenav").style.top = "80%";
+        document.getElementById("background").style.filter = "invert(20%)";
+        document.getElementById("header").addEventListener("click", openNav);
+        document.getElementById("header").removeEventListener("click", closeNav);
+        document.getElementById("menu").style.top = height+"px";
+        events[0].style.display = "block";
+        events[1].style.display = "none";
+    }
+
+    function shade(n) {
+        document.getElementById("step"+n).style.filter = "blur(5px) grayscale(50%)";
+    }
+    var check = [true,true,true,true,true,true,true];
+    function unshade(n) {
+        if(check[n-1])
+            document.getElementById("step" + n).style.filter = "none";
+    }
+
+    function move() {
+        document.getElementsByClassName("main")[0].style.marginTop = "0";
+        document.getElementsByClassName("main")[0].style.marginBottom = "1%";
+        document.getElementsByClassName("main")[1].style.marginTop = "2%";
+        document.getElementsByClassName("main")[1].style.marginBottom = "0";
+    }
+    function moveback() {
+        document.getElementsByClassName("main")[0].style.marginTop = "1%";
+        document.getElementsByClassName("main")[0].style.marginBottom = "0";
+        document.getElementsByClassName("main")[1].style.marginTop = "1%";
+        document.getElementsByClassName("main")[1].style.marginBottom = "1%";
+    }
+
+
+    var slideIndex = 1;
+    
+
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
+
+    function showDivs(n) {
+        var i;
+ 
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 1; i <= check.length; i++) {
+            check[i - 1] = true;
+            unshade(i);
+//          document.getElementById("title").innerHTML = ;
+        }
+
+        x[slideIndex - 1].style.display = "block";
+        shade(n);
+        check[n-1] = false;
+    }
+</script>
