@@ -264,6 +264,30 @@
 				<h3 class="top col-md-offset-1 col-md-10">
 					Result: 
 				</h3>
+				<div class="col-md-offset-1 col-md-10">
+					<div class="row">
+						<div class="col-md-4">
+							<img class="sh-image" src="./img/persian_cat_styled_1.jpg">
+						</div> 
+						<div class="col-md-4">
+							<img class="offset_sp sh-image" src="./img/fishman_styled_1.jpg">
+						</div> 
+						<div class="col-md-4">
+							<img class="offset_sp sh-image" src="./img/valley_styled_1.jpg">
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-4">
+							<img class="sh-image" src="./img/persian_cat_styled_2.jpg">
+						</div> 
+						<div class="col-md-4">
+							<img class="offset_sp sh-image" src="./img/fishman_styled_2.jpg">
+						</div> 
+						<div class="col-md-4">
+							<img class="offset_sp sh-image" src="./img/valley_styled_2.jpg">
+						</div>
+					</div>
+				</div>
 				<p class="col-md-offset-1 col-md-10">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is a video demonstration of our final product: 
 				</p>
@@ -280,7 +304,6 @@
 				</h3>
 				<p class="col-md-offset-1 col-md-10">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our current approach provides a fairly artistic result, but it is far from perfect and has a lot of restrictions and flaws. For style-transferring, our approach needs to re-train the VGG19 model everytime we choose a different style image or content image. This can be very inefficient. In addition, due to the way the cost function is defined, our model cannot distort any lines or shapes of the content image to match the style of style image better. These can be resolved by using some more comprehensive style transfer models. Another limitation posed by this model is that it requires the content image and style image to have the same size. We tried to solve this issue using image quilting, but image quilting requires the style image to be more consistent so that all small segments of the image would be visually similar to each other. Some other solutions to this include photomontage or use more comprehensive models. As for image segmentation, k = 2 is currently used for simplicity, but an image can usually be cut into much more segments and several different regions. Consequently, various segments will be cut into the same region. This can be resolved by increasing the value of k or using other image segmentation algorithms such as the mean shift algorithm. Another problem with our current image segmentation algorithm is that it is not very accurate, especially on images with low contrast and images with a relatively uniform density map. This can also be resolved by implementing some more comprehensive image segmentation algorithms. 
-
 				</p>
 			</div>
 			<hr>
@@ -410,7 +433,7 @@
 		margin-top: 5px;
 	}
 	.sh-image {
-		max-height: 180px;
+		max-height: 200px;
 		margin-top: 5px;
 	}
 	.primary-button {
@@ -456,7 +479,7 @@
 	.sidenav a {
 	  padding: 8px 8px 8px 32px;
 	  text-decoration: none;
-	  color: #818181;
+	  color: #D1D1D1;
 	  display: block;
 	  transition: 0.3s;
 	}
