@@ -13,12 +13,12 @@
 	<div id="mySidenav" class="sidenav">
 	  <a href="#top-page" class="glyphicon glyphicon-menu-up upbtn"></a>
 	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a href="#motivation">Motivation</a>
-	  <a href="#state-of-art">Current State of Art</a>
-	  <a href="#approach">Approach</a>
-	  <a href="#result">Result</a>
-	  <a href="#evaluation">Evaluation and Future Improvement</a>
-	  <a href="#reference">Reference</a>
+	  <a class="side-cell" href="#motivation">Motivation</a>
+	  <a class="side-cell" href="#state-of-art">Current State of Art</a>
+	  <a class="side-cell" href="#approach">Approach</a>
+	  <a class="side-cell" href="#result">Result</a>
+	  <a class="side-cell" href="#evaluation">Evaluation and Future Improvement</a>
+	  <a class="side-cell" href="#reference">Reference</a>
 	</div>
 	<div class="nav">
 		<h1 class="text_center">CS534 Final Project: Partial Image Style Transfer</h1>
@@ -27,7 +27,7 @@
 		<div class="page">
 			<div class="row offset wide">
 				<div class="col-md-offset-2 col-md-8">
-					<h3 class="row">
+					<h3 class="row bold">
 						<span class="col-md-12">University of Wisconsin-Madison CS534 Computational Photography</span>
 					</h3>
 					<h4 class="row">
@@ -54,7 +54,7 @@
 						<img class="image" src="./img/fishman_styled_1.jpg"/>
 					</div>
 					<div class="col-md-6">
-						<h3 class="top">Motivation:</h3>
+						<h3 class="top bold">Motivation:</h3>
 						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For long, the style and the content of a picture are considered as two distinct aspects. People associate the content of an image with the objects captured in the image and the style with the way the image presents its content. Despite that, style and content are two integrated parts of an image and it is hard to separate them. Yet thanks to modern technology, now we are not only capable of separating style and content, but also applying the style of one image to the content of another, making it possible to see a painting of spacecraft “by Van Gogh”. Style transferring can in a sense generate new images that never existed in the world and create more art pieces. Practically, the style transfer can be applied as filters in image processing on camera or smart devices which helps to make pictures to look novel and fancy.</p>
 					</div>
 				</div>
@@ -73,7 +73,7 @@
 			</div>
 			<hr>
 			<div class="row" id="state-of-art">
-				<h3 class="top col-md-offset-1 col-md-10">
+				<h3 class="top col-md-offset-1 col-md-10 bold">
 					Current State of Art:
 				</h3>
 				<p class="col-md-offset-1 col-md-10">
@@ -92,7 +92,7 @@
 			</div>
 			<hr>
 			<div class="row" id="approach">
-				<h3 class="top col-md-offset-1 col-md-10">
+				<h3 class="top col-md-offset-1 col-md-10 bold">
 					Appraoch:
 				</h3>
 				<h4 class="top col-md-offset-1 col-md-10">
@@ -265,7 +265,7 @@
 			
 			<hr>
 			<div class="row" id="result">
-				<h3 class="top col-md-offset-1 col-md-10">
+				<h3 class="top col-md-offset-1 col-md-10 bold">
 					Result: 
 				</h3>
 				<div class="col-md-offset-1 col-md-10">
@@ -303,7 +303,7 @@
 			</div>
 			<hr>
 			<div class="row" id="evaluation">
-				<h3 class="top col-md-offset-1 col-md-10">
+				<h3 class="top col-md-offset-1 col-md-10 bold">
 					Evaluation and Future Improvements:
 				</h3>
 				<p class="col-md-offset-1 col-md-10">
@@ -314,10 +314,10 @@
 			<div class="row" id="reference">
 				<div class="col-md-offset-1 col-md-10">
 					<div class="row">
-						<h3 class="col-md-2">
+						<h3 class="col-md-2 bold">
 							Reference:
 						</h3>
-						<div class="col-md-8">
+						<div class="col-md-offset-1 col-md-7">
 							<p class="row">Leon A. Gatys, Alexander S. Ecker, Matthias Bethge, (2015). A Neural Algorithm of Artistic Style
 								</br>
 								<a class="" href="https://arxiv.org/abs/1508.06576">https://arxiv.org/abs/1508.06576</a>
@@ -355,6 +355,9 @@
 </html>
 
 <style type="text/css">
+	.side-cell {
+		min-width: 15em;
+	}
 	a {
 		margin: 0;
 		padding: 0;
@@ -418,7 +421,6 @@
 	h3 {
 		font-size: 1.7em;
 		margin: 10px;
-		font-weight: bold;
 	}
 	h4 {
 		font-size: 1.2em;
