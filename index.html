@@ -93,7 +93,7 @@
 			<hr>
 			<div class="row" id="approach">
 				<h3 class="top col-md-offset-1 col-md-10">
-					Approch:
+					Appraoch:
 				</h3>
 				<h4 class="top col-md-offset-1 col-md-10">
 					Style Transfer: 
@@ -166,7 +166,7 @@
 					Image Segmentation: 
 				</h4>
 				<div class="col-md-offset-1 col-md-10">
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting with seprating the RGB channels of the image, reshape and store all three channels as three features of the data point (pixel).</p>
+					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting with separating the RGB channels of the image, reshape and store all three channels as three features of the data point (pixel).</p>
 					<div class="row">
 						<div class="col-md-4">
 							<img class="image" src="./img/persian_cat_r.jpg">
@@ -178,7 +178,7 @@
 							<img class="offset_sp image" src="./img/persian_cat_b.jpg">
 						</div>
 					</div>
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then get the X Y coordinents of all the pixels of the image, rescale the value so that they are all from 0 to 255. Multiply a weight to the X Y coordinents and store them as two features of the data point.</p>
+					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then get the X Y coordinates of all the pixels of the image, rescale the value so that they are all from 0 to 255. Multiply a weight to the X Y coordinates and store them as two features of the data point.</p>
 					<div class="row">
 						<div class="col-md-offset-1 col-md-5">
 							<img class="image" src="./img/persian_cat_x.jpg">
@@ -187,7 +187,7 @@
 							<img class="offset_sp image" src="./img/persian_cat_y.jpg">
 						</div> 
 					</div>
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A feature we called the "Density Map" which measures the density of details that is in a centain area aroud the pixel is also used as the sixth feature. We defined details to be the amount of edges, more detail means there are more edges in the area, and less detail means there are less edges in the are. First of all, the RGB image is changed into a gray scale image and then applied a convolution using Laplacian filter on to the image to generate an edge-only image.</p>
+					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A feature we called the "Density Map" which measures the density of details that are in a certain area around the pixel is also used as the sixth feature. We defined details to be the amount of edges, more detail means there are more edges in the area, and less detail means there are fewer edges in the are. First of all, the RGB image is changed into a gray scale image and then applied a convolution using the Laplacian filter on to the image to generate an edge-only image.</p>
 					<div class="row">
 						<div class="col-md-offset-1 col-md-4">
 							<img class="image" src="./img/persian_cat.jpg">
@@ -199,7 +199,7 @@
 							<img class="offset_sp image" src="./img/persian_cat_edg.jpg">
 						</div>
 					</div>
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once we got the edge-only image, the density map can be calculated by appliying some averaging filters. We first tried using just the avraging filter which take the sum of all the pixels in the area and devide by numbers of pixels. However, the result was not working so well. Then we decided to use the Gaussian filter.</p>
+					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once we got the edge-only image, the density map can be calculated by applying some averaging filters. We first tried using just the averaging filter which takes the sum of all the pixels in the area and divide by numbers of pixels. However, the result was not working so well. Then we decided to use the Gaussian filter.</p>
 					<div class="row">
 						<div class="col-md-4">
 							<img class="sh-image" src="./img/persian_cat.jpg">
@@ -224,13 +224,13 @@
 					</div>
 					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now we got all the features needed, each feature point is formed by:
 					[ R G B 1.2X(255/max(X)) 1.2Y(255/max(Y)) 1.5Density]
-					Then we just perform a regular 2-means clustoring based on the algorithm</p>
+					Then we just perform a regular 2-means clustering based on the algorithm</p>
 					<div class="row">
 						<div class="col-md-offset-2 col-md-8">
 							<img class="image" src="./img/kmeans.png">
 						</div>
 					</div> 
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The following is some of our result:</p>
+					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The following is some of our results:</p>
 					<div class="row">
 						<div class="col-md-4">
 							<img class="sh-image" src="./img/persian_cat_1.jpg">
@@ -259,7 +259,7 @@
 					Integration:
 				</h4>
 				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once we generated the style-transferred image and had the original image segmented, we can build a user interface where user can click anywhere on the original image and the part of image clicked will receive a new style while the rest of the image remains the same. This user interface simply takes the coordination of the mouse clicking event, determines which segment of the image is clicked, and then generate an image similar to the original one exception the segment clicked is replaced by the same segment from the style-transferred image. The generated image will then be displayed in the UI. 
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once we generated the style-transferred image and had the original image segmented, we can build a user interface where the user can click anywhere on the original image and the part of image clicked will receive a new style while the rest of the image remains the same. This user interface simply takes the coordination of the mouse clicking event, determines which segment of the image is clicked, and then generate an image similar to the original one except the segment clicked is replaced by the same segment from the style-transferred image. The generated image will then be displayed in the UI. 
 				</p>
 			</div>
 			
@@ -577,7 +577,7 @@
 	        event.preventDefault();
 	        $('html, body').animate({
 	          scrollTop: target.offset().top
-	        }, 300, function() {
+	        }, 700, function() {
 	          // Callback after animation
 	          // Must change focus!
 	          // var $target = $(target);
