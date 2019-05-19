@@ -1,598 +1,207 @@
-<!DOCTYPE html>
-<html>
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.0/css/all.css" integrity="sha384-aOkxzJ5uQz7WBObEZcHvV5JvRW3TUc2rNPA7pe3AwnsUohiw1Vj2Rgx2KSOkF5+h" crossorigin="anonymous">
-	<link rel="stylesheet" type="text/css" href="bootstrap-social.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML' async></script>
-	<title>Partial Style Transformation</title>
+    <meta charset="utf-8" />
+    <title>Project 2</title>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+    
 </head>
-<body id="top-page">
-	<div id="menu_btn" onclick="openNav()"><span class="glyphicon glyphicon-chevron-right"></span></div>
-	<div id="mySidenav" class="sidenav">
-	  <a href="#top-page" class="glyphicon glyphicon-menu-up upbtn"></a>
-	  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-	  <a class="side-cell" href="#motivation">Motivation</a>
-	  <a class="side-cell" href="#state-of-art">Current State of Art</a>
-	  <a class="side-cell" href="#approach">Approach</a>
-	  <a class="side-cell" href="#result">Result</a>
-	  <a class="side-cell" href="#evaluation">Evaluation and Future Improvement</a>
-	  <a class="side-cell" href="#reference">Reference</a>
-	</div>
-	<div class="nav">
-		<h1 class="text_center">CS534 Final Project: Partial Image Style Transfer</h1>
-	</div>
-	<div class="container">
-		<div class="page">
-			<div class="row offset wide">
-				<div class="col-md-offset-2 col-md-8">
-					<h3 class="row bold">
-						<span class="col-md-12">University of Wisconsin-Madison CS534 Computational Photography</span>
-					</h3>
-					<h4 class="row">
-						<span class="col-md-3">Jialuo Gao</span> 
-						<span class="col-md-5"><span class="bold">Email:</span> jgao223@wisc.edu</span> 
-						<span class="col-md-4"><span class="bold">NetId:</span> jgao223</span>
-					</h4>
-					<h4 class="row">
-						<span class="col-md-3">Suyan Qu</span> 
-						<span class="col-md-5"><span class="bold">Email:</span> squ27@wisc.edu</span> 
-						<span class="col-md-4"><span class="bold">NetId:</span> squ27</span>
-					</h4>
-					<h4 class="row">
-						<span class="col-md-3">Kai Wang</span> 
-						<span class="col-md-5"><span class="bold">Email:</span> kwang339@wisc.edu</span> 
-						<span class="col-md-4"><span class="bold">NetId:</span> kwang339</span>
-					</h4>
-				</div>
-			</div>
-			<hr>
-			<div class="row" id = "motivation">
-				<div class="row">
-					<div class="col-md-4 col-md-offset-1">
-						<img class="image" src="./img/fishman_styled_1.jpg"/>
-					</div>
-					<div class="col-md-6">
-						<h3 class="top bold">Motivation:</h3>
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;For long, the style and the content of a picture are considered as two distinct aspects. People associate the content of an image with the objects captured in the image and the style with the way the image presents its content. Despite that, style and content are two integrated parts of an image and it is hard to separate them. Yet thanks to modern technology, now we are not only capable of separating style and content, but also applying the style of one image to the content of another, making it possible to see a painting of spacecraft “by Van Gogh”. Style transferring can in a sense generate new images that never existed in the world and create more art pieces. Practically, the style transfer can be applied as filters in image processing on camera or smart devices which helps to make pictures to look novel and fancy.</p>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-4 col-md-offset-1">
-						<img class="image" src="./img/shanghai_styled_0.jpg"/>
-					</div>
-					<div class="col-md-6">
-						<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Moreover, It can potentially help artists to do some of the tedious work so that they can focus more on creating shocking artworks, which is significant as artists generally do not have a steady income and fewer and fewer people are willing to sacrifice for art. As a result, the advancement of modern art has come to a pause, and no artists as well-known as Pablo Picasso have appeared after his death. If we can motivate the limited number of artists in the world, we can accelerate the advancement of modern art and potentially evoke a new era of “Renaissance” as creating art pieces become less time-consuming. Also, style-transfer technology can potentially help us bring back styles from those long lost great artists of our rase; those styles that have been gone for long such as Vincent van Gogh, Leonardo da Vinci, and so forth.</p>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<p class="col-md-offset-1 col-md-10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;However, simply applying existing styles to a content image may restrict modern artists’ creativity. Also to add more flexibility and artisticness of the resultant image, it is more desirable sometimes to be able to apply the style on, instead of the whole image, only part of the image, such as the background.</p>
-				<p class="col-md-offset-1 col-md-10">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The purpose of this project is to implement a style transferring algorithm that can apply the style of one image to a part of the content of another, then merge the style-transferred image with the original content image. We have accomplished this by training a pre-trained vgg19 model and our theories are based on the work by Gatys et al (2015) then apply a modified k means algorithm to do image segmentation.</p>
-			</div>
-			<hr>
-			<div class="row" id="state-of-art">
-				<h3 class="top col-md-offset-1 col-md-10 bold">
-					Current State of Art:
-				</h3>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Creating the best art, we need to use some of the most advanced technology to do so. Currently, few techniques can generate a partially style-transferred image directly, but both style transfer and image segmentation are well implemented. The current state-of-the-art for style transfer is neural networks(especially convolutional neural network) with deep learning. Those methods are very commonly used when doing style transfer due to its powerful ability in deconstructing images. However, one downside is that deep learning requires a large amount of training data and computational resources to train the model from scratch. Due to the lack of training data, we decided to use a pre-trained model vgg19 to aid us. 
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The current state-of-art for image segmentation is more comprehensive. While traditional image processing algorithms like k-mean and mean shift is effective approaches, neural networks are also used to generate a more precise result. Some latest image segmentation neural network algorithms can recognize a small strand of hair as a part of a person. Although such high accuracy is desirable, running such a neural network algorithm can also be very costly. Instead, we choose k means for an efficient image segmentation. 
 
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;We are going to re-implement an existing solution created by Gatys et al (2015) to do the style transfer task, and then use k means to generate a partially style-transferred image. As technology develops, style transferring and image segmentation using deep learning has become more and more powerful; as those algorithms produce desirable results, they also got more and more complicated, costly, and harder to implement as well. As a result, we decided to re-implement some relatively more straightforward and existed solutions to start with. 
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;During the process, we have encountered several problems. For style transfer, since none of us had much experience with deep learning previously, we needed to learn some more powerful tools such as TensorFlow. However, once we understood how to use TensorFlow, the transfer learning algorithm was much easier to implement. For image segmentation, we encountered more problems. Our first version of the k-means algorithm uses only the RGB value of each pixel as its features, but the result was not quite desirable since discontinuous areas of similar colors were categorized as the same segment. To prevent that, the coordinates of each pixel were also added to its feature vector. This helps to keep the segments continuous. Yet this brought some new issues as the algorithm tended to segment the image by its diagonal when the difference between color is not obvious. To fix that, we further added a feature we called "Density map" indicate how detailed that portion of the image was, which implied how close the object was to the camera, to our feature vector. See below for more details on our approaches.  
-				</p>
-			</div>
-			<hr>
-			<div class="row" id="approach">
-				<h3 class="top col-md-offset-1 col-md-10 bold">
-					Appraoch:
-				</h3>
-				<h4 class="top col-md-offset-1 col-md-10">
-					Style Transfer: 
-				</h4>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Before transferring the style, we are planning on doing preprocessing to both content and style image to amplify the style on the style image and remove the style from the content image to help our model to reach the best result.
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Afterward, we can implement the style transfer algorithm. To do this, we use the pre-trained Matlab built-in model vgg19. The model is trained by minimizing a cost function defined below:
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The cost function \(J\) is composed of 2 parts: \(J_{content}\), representing how much of the content in the input content image is preserved, and \(J_{style}\), representing how similar the style of the output is to the input style image. To compute Jcontent, the content image is first put into the model before training starts, and the output of a hidden layer (conv4_2), \(a^{(C)}\), composed of \(m\) 3D arrays of size \(n_{H} \times n_{W} \times n_{C}\) , is retrieved. During the training stage, the result of the same layer, \(a^{(G)}\) is also retrieved. Then \(J_{content}\) is calculated by averaging the square difference of every entry: 
-				</p>
-				<p class="col-md-offset-1 col-md-10 equation">
-					$$J_{content}={1 \over 4 \times m \times n_C \times n_W \times n_H} \sum_{all \text{ } entries}{(a^{(C)}-a^{(G)})^2} $$
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Similarly, the style image is also passed into the model. Yet here, the output of multiple convolution layers are extracted to compute the final style cost. At each layer, \(a^{(C)}\), still composed of \(m\) 3D arrays of size \(n_H \times n_W \times n_C\), is retrieved. Yet before calculating the square difference between each entry, each 3D array is unrolled so that it becomes a 2D matrix of \((n_H \times n_W) \times n_C\). The Gram Matrix, representing the correlation between filters, is then calculated by calculating the outer product of the unrolled matrix: 
-				</p>
-				<p class="col-md-offset-1 col-md-10 equation">
-					$$G^{(C)} = A \cdot A^T$$
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Where A is the unrolled matrix and G(C)is the Gram Matrix of the output of the given layer of the style image. During the training stage, the Gram Matrix of the given layer’s output G(G)is calculated. Then the square difference of each entry is calculated and normalized to get the cost of the current layer.  
-				</p>
-				<p class="col-md-offset-1 col-md-10 equation">
-					$$J_{style}^{[l]}={1 \over 4 \times n_C^2 \times (n_W \times n_H)^2} \sum{(G^{(C)}-G^{(G)})^2} $$
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then the weighted average of all selected layers is calculated. This weighted average is our file style cost. 
-				</p>
-				<p class="col-md-offset-1 col-md-10 equation">
-					$$J_{style}=\sum_l{\lambda^{[l]}J_{style}^{[l]}} $$
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Finally, the total cost would be the weighted sum of the style cost and content cost calculated above:
-				</p>
-				<p class="col-md-offset-1 col-md-10 equation">
-					$$J=\alpha \cdot J_{content} + \beta \cdot J_{style}$$
-				</p>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Use this cost function as the cost function of the vgg19 model, a model for style transfer can be trained through transfer learning by minimizing the cost function using gradient descent. A low cost means that the generated image preserves not only the content of the content image but also visually similar to our style image (rather than the content because Gram Matrix is used and the cost function therefore only cares about the correlation rather than the content itself). The result usually converges after around 240 iterations. Below are some samples generated by the algorithm above: 
-				</p>
-				<div class="col-md-offset-1 col-md-3">
-					<div class="row">
-						<img class="image" src="./img/persian_cat_h.jpg"/>
-					</div>
-					<div class="row">
-						<p class="caption">Persian Cat Styled by Hokusai</p>
-					</div>
-				</div>
-				<div class="offset_sp col-md-3">
-					<div class="row">
-						<img class="image" src="./img/animation.gif"/>
-					</div>
-					<div class="row">
-						<p class="caption">Persian Cat Styled by Starry Night (GIF)</p>
-					</div>
-				</div>
-				<div class="offset_sp col-md-3">
-					<div class="row">
-						<img class="image" src="./img/persian_cat_ts.jpg"/>
-					</div>
-					<div class="row">
-						<p class="caption">Persian Cat Styled by The Scream</p>
-					</div>
-				</div>
+<body>
+    <div id="container">
+        <div onclick="openNav()" id="header">
+            <img id="background" src="images/background.jpg" />
+            <div id="titleDiv"><h1 id="title">Introduction<br /> to Go</h1>
+                               <h1 id="shadow">Introduction<br /> to Go</h1></div>
+        </div>
 
-				<h4 class="top col-md-offset-1 col-md-10">
-					Image Segmentation: 
-				</h4>
-				<div class="col-md-offset-1 col-md-10">
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Starting with separating the RGB channels of the image, reshape and store all three channels as three features of the data point (pixel).</p>
-					<div class="row">
-						<div class="col-md-4">
-							<img class="image" src="./img/persian_cat_r.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp image" src="./img/persian_cat_g.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp image" src="./img/persian_cat_b.jpg">
-						</div>
-					</div>
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Then get the X Y coordinates of all the pixels of the image, rescale the value so that they are all from 0 to 255. Multiply a weight to the X Y coordinates and store them as two features of the data point.</p>
-					<div class="row">
-						<div class="col-md-offset-1 col-md-5">
-							<img class="image" src="./img/persian_cat_x.jpg">
-						</div> 
-						<div class="col-md-5">
-							<img class="offset_sp image" src="./img/persian_cat_y.jpg">
-						</div> 
-					</div>
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;A feature we called the "Density Map" which measures the density of details that are in a certain area around the pixel is also used as the sixth feature. We defined details to be the amount of edges, more detail means there are more edges in the area, and less detail means there are fewer edges in the are. First of all, the RGB image is changed into a gray scale image and then applied a convolution using the Laplacian filter on to the image to generate an edge-only image.</p>
-					<div class="row">
-						<div class="col-md-offset-1 col-md-4">
-							<img class="image" src="./img/persian_cat.jpg">
-						</div> 
-						<div class="col-md-2">
-							<img class="offset_sp image" src="./img/laplacian.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp image" src="./img/persian_cat_edg.jpg">
-						</div>
-					</div>
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once we got the edge-only image, the density map can be calculated by applying some averaging filters. We first tried using just the averaging filter which takes the sum of all the pixels in the area and divide by numbers of pixels. However, the result was not working so well. Then we decided to use the Gaussian filter.</p>
-					<div class="row">
-						<div class="col-md-4">
-							<img class="sh-image" src="./img/persian_cat.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/fishman.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/valley.jpg">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<img class="sh-image" src="./img/persian_cat_dstm.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/fishman_dstm.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/valley_dstm.jpg">
-						</div>
-					</div>
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Now we got all the features needed, each feature point is formed by:
-					[ R G B 1.2X(255/max(X)) 1.2Y(255/max(Y)) 1.5Density]
-					Then we just perform a regular 2-means clustering based on the algorithm</p>
-					<div class="row">
-						<div class="col-md-offset-2 col-md-8">
-							<img class="image" src="./img/kmeans.png">
-						</div>
-					</div> 
-					<p class="row">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;The following is some of our results:</p>
-					<div class="row">
-						<div class="col-md-4">
-							<img class="sh-image" src="./img/persian_cat_1.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/fishman_1.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/valley_1.jpg">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<img class="sh-image" src="./img/persian_cat_2.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/fishman_2.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/valley_2.jpg">
-						</div>
-					</div>
-				</div>
-
-				<h4 class="top col-md-offset-1 col-md-10">
-					Integration:
-				</h4>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Once we generated the style-transferred image and had the original image segmented, we can build a user interface where the user can click anywhere on the original image and the part of image clicked will receive a new style while the rest of the image remains the same. This user interface simply takes the coordination of the mouse clicking event, determines which segment of the image is clicked, and then generate an image similar to the original one except the segment clicked is replaced by the same segment from the style-transferred image. The generated image will then be displayed in the UI. 
-				</p>
-			</div>
-			
-			<hr>
-			<div class="row" id="result">
-				<h3 class="top col-md-offset-1 col-md-10 bold">
-					Result: 
-				</h3>
-				<div class="col-md-offset-1 col-md-10">
-					<div class="row">
-						<div class="col-md-4">
-							<img class="sh-image" src="./img/persian_cat_styled_1.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/fishman_styled_1.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/valley_styled_1.jpg">
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-4">
-							<img class="sh-image" src="./img/persian_cat_styled_2.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/fishman_styled_2.jpg">
-						</div> 
-						<div class="col-md-4">
-							<img class="offset_sp sh-image" src="./img/valley_styled_2.jpg">
-						</div>
-					</div>
-				</div>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Here is a video demonstration of our final product: 
-				</p>
-				<div class="col-md-offset-1 col-md-10">
-					<p align="center">
-					<iframe width="560" height="315" src="https://www.youtube.com/embed/CVKYaI30mfw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-					</p>
-				</div>
-			</div>
-			<hr>
-			<div class="row" id="evaluation">
-				<h3 class="top col-md-offset-1 col-md-10 bold">
-					Evaluation and Future Improvements:
-				</h3>
-				<p class="col-md-offset-1 col-md-10">
-					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Our current approach provides a fairly artistic result, but it is far from perfect and has a lot of restrictions and flaws. For style-transferring, our approach needs to re-train the VGG19 model everytime we choose a different style image or content image. This can be very inefficient. In addition, due to the way the cost function is defined, our model cannot distort any lines or shapes of the content image to match the style of style image better. These can be resolved by using some more comprehensive style transfer models. Another limitation posed by this model is that it requires the content image and style image to have the same size. We tried to solve this issue using image quilting, but image quilting requires the style image to be more consistent so that all small segments of the image would be visually similar to each other. Some other solutions to this include photomontage or use more comprehensive models. As for image segmentation, k = 2 is currently used for simplicity, but an image can usually be cut into much more segments and several different regions. Consequently, various segments will be cut into the same region. This can be resolved by increasing the value of k or using other image segmentation algorithms such as the mean shift algorithm. Another problem with our current image segmentation algorithm is that it is not very accurate, especially on images with low contrast and images with a relatively uniform density map. This can also be resolved by implementing some more comprehensive image segmentation algorithms. 
-				</p>
-			</div>
-			<hr>
-			<div class="row" id="reference">
-				<div class="col-md-offset-1 col-md-10">
-					<div class="row">
-						<h3 class="col-md-2 bold">
-							Reference:
-						</h3>
-						<div class="col-md-offset-1 col-md-7">
-							<p class="row">Leon A. Gatys, Alexander S. Ecker, Matthias Bethge, (2015). A Neural Algorithm of Artistic Style
-								</br>
-								<a class="" href="https://arxiv.org/abs/1508.06576">https://arxiv.org/abs/1508.06576</a>
-							</p>
-							<p class="row">Log0, TensorFlow Implementation of "A Neural Algorithm of Artistic Style".
-								</br>
-								<a class="" href="http://www.chioka.in/tensorflow-implementation-neural-algorithm-of-artistic-style">http://www.chioka.in/tensorflow-implementation-neural-algorithm-of-artistic-style</a>
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
-			<hr>
-			<div class="row">
-				<div class="col-md-offset-1 col-md-10 text_center"><h2>Check Out Our Works!</h2></div>
-				<div class="col-md-offset-1 col-md-10 row">
-					<div class="col-md-6">
-						<a href="https://github.com/squ27/Style_Transfer" class="primary-button btn btn-block btn-github">
-							<span class="button-icon fab fa-github"></span>Github Repository
-						</a>
-					</div>
-					<div class="col-md-6">
-						<a href="https://docs.google.com/presentation/d/1TYpq_qxnjOgKYRyiR7J6i5xrJ2qlStmHVXqrL5lgZ6g/edit?usp=sharing" class="primary-button btn btn-block btn-google">
-							<span class="button-icon fab fa-google-drive"></span>Google Drive Presentation
-						</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	<footer class="main-footer">
-    	<p>© 2018 Jialuo Gao, Suyan Qu, Kai Wang | All Rights Reserved</p>
-	</footer>
+        <div id="mySidenav" class="sidenav">
+            <div id="footer">
+                <p class="copy">Copyright &copy; 2017 Jialuo Gao</p>
+            </div>
+            <div onmouseover="move()" onmouseout="moveback()" onclick="openNav()" 
+                 class="main event" style="font-size:4em;cursor:pointer;position:center"><img class="arrow" src="images/arrow.png" /></div>
+            <div onmouseover="move()" onmouseout="moveback()" onclick="closeNav()"
+                 class="main event" style="font-size:4em;cursor:pointer;position:center"><img class="arrow" src="images/arrowDown.png" /></div>
+            
+                <div id="menu">
+                    <div id="step1" class="rectangle white" onmouseover="shade(1)" onmouseout="unshade(1)" onclick="currentDiv(1)"><span>General</span></div>
+                    <div id="step2" class="rectangle white" onmouseover="shade(2)" onmouseout="unshade(2)" onclick="currentDiv(2)"><span>Process</span></div>
+                    <div id="step3" class="rectangle small-white" onmouseover="shade(3)" onmouseout="unshade(3)" onclick="currentDiv(3)"><span>Territory & Capture</span></div>
+                    <div id="step4" class="rectangle white" onmouseover="shade(4)" onmouseout="unshade(4)" onclick="currentDiv(4)"><span>Connections</span></div>
+                    <div id="step5" class="rectangle white" onmouseover="shade(5)" onmouseout="unshade(5)" onclick="currentDiv(5)"><span>Eyes</span></div>
+                    <div id="step6" class="rectangle white" onmouseover="shade(6)" onmouseout="unshade(6)" onclick="currentDiv(6)"><span>Ko</span></div>
+                    <div id="step7" class="rectangle white" onmouseover="shade(7)" onmouseout="unshade(7)" onclick="currentDiv(7)"><span>Read More</span></div>
+                </div>
+            <div id="content" class="white ">
+                <div class="mySlides">
+                    <div style="width:50%;height:70%;float:left"><p id="p1">The board used to play Go is a board with a 19×19 grid of lines. Beginners often play on smaller boards including 9×9 and 13×13 boards. The game is played by placing the playing pieces called stones on empty intersections of the lines that called points. There are two colors of stones, black and white, used by two players respectively.</p></div>
+                    <div><img class="general"src="images/board.jpg" /></div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:50%;height:70%;float:left"><p id="p2">Starting from an empty board, the black player moves first; then players take turns to play. At any time a player may pass (skip their round). When both players have passed, the game is finished. The objective of Go is to fully surround a larger total area of the board than the opponent. At the end of the game, the player with the higher points wins. Points are gained in the following ways: surrounding territory and capturing the opponent's stones. </p></div>
+                    <div><img class="general" src="images/playGo.jpg" /></div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:50%;height:70%;float:left">
+                        <div><p id="p3-1">The territory is empty spaces that are surrounded completely by stones of the same color and the edge of the board. Each space counts as one point.</p></div>
+                        <div style="width:49%;height:70%;float:left">
+                            <img src="images/territory1.jpg" />
+                            <p class="none smallest-white">
+                                Top half is black territory;<br/>
+                                Bottom half is white territory
+                            </p>
+                        </div>
+                        <div style="width:49%;height:70%;float:right">
+                            <p class="none smallest-white">
+                                Right half is black territory;<br />
+                                Left half is white territory
+                            </p>
+                            <img src="images/territory2.jpg" />
+                        </div>
+                    </div>
+                    <div style="width:50%;height:70%;float:right;">
+                        <div style="float:left;width:60%;padding-right:2%;" >
+                            <img src="images/capture.jpg" style="width:100%;margin-top:10%" />
+                            <p class="none smallest-white">
+                                Examples of capturing
+                            </p>
+                        </div>
+                        <div><p class="p3-2">Players can capture their opponent's stones by filling all the adjacent points around them. The captured stones are removed from the board and kept by the player who captured them, which is later counted as a win condition.</p></div>
+                    </div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:60%;height:70%;float:left;padding-left:2.5%;padding-right:2.5%;"><p id="p2">Stones of the same color on immediately adjacent points are said to be connected or joined. The connection can be horizontal or vertical, but not diagonal - the connection is along the lines. When vertical or horizontal connections are formed, they have to be captured as a whole; they can not be captured separately.</p></div>
+                    <div style="width:35%;height:70%;float:right">
+                        <img class="general" src="images/connection.jpg" style="width:100%;height:auto"/>
+                        <p class="none smallest-white">
+                            Black stones are connected;<br/>
+                            White stones are not connected
+                        </p>
+                    </div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:100%;height:40%"><p class="p3-2">For a group of stones to be captured, all the intersections touching the group must be filled. The group must not only be surrounded on the outside, but empty spaces inside the group adjacent to the stones must also be filled.(graph 1) A single empty space inside a group is called an eye.(graph 2) Indeed, by the end of the game, for a group to remain alive it must contain at least two eyes.(graph 3)</p></div>
+                    <div style="width:100%">
+                        <img class="general-small" src="images/eye1.jpg" />
+                        <img class="general-small" src="images/eye2.jpg" />
+                        <img class="general-small" src="images/eye3.jpg" />
+                    </div>
+                    <div style="width:80%;margin-left:12%"><p class="none smallest-white">Graph 1 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                                                      Graph 2 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp
+                                                                                      Graph 3</p> </div>
+                </div>
+                <div class="mySlides">
+                    <div style="width:40%;height:70%;float:left"><p id="p2">When a stone making a capture is vulnerable to being recaptured immediately, the situation is called a ko. In a ko, if one side captures, the other side may not recapture immediately but must wait at least one move to recapture.</p></div>
+                    <div style="float:left;width:30%;margin-top:5%"> 
+                        <img style="width:95%"class="general-small" src="images/Goko.gif"/>
+                        <p class="none smallest-white-2">
+                            Example of Ko
+                        </p>
+                    </div>
+                    <div style="float:right;width:30%;margin-top:1%;">
+                        <p class="none smallest-white-2">
+                            The right way to play <br/>
+                            under rules
+                        </p>
+                        <img style="width:85%"class="general-small" src="images/Goko3.gif" />
+                    </div>
+                </div>
+                <div class="mySlides">
+                    <div>
+                        <ul class="line-space">
+                            <li><a href="https://www.pandanet.co.jp/English/learning_go/learning_go_1.html">https://www.pandanet.co.jp/English/learning_go/learning_go_1.html</a></li>
+                            <li><a href="https://en.wikipedia.org/wiki/Go_(game)">https://en.wikipedia.org/wiki/Go_(game)</a></li>
+                            <li><a href="https://www.youtube.com/watch?v=JWdgqV-8yVg">https://www.youtube.com/watch?v=JWdgqV-8yVg</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div> 
+    </div>
 </body>
 </html>
 
-<style type="text/css">
-	.side-cell {
-		min-width: 15em;
-	}
-	a {
-		margin: 0;
-		padding: 0;
-	}
-	.top {
-		margin-top: 0;
-		padding-top: 0;
-	}
-	hr {
-		border-color: #CDCDCD;
-	}
-	.offset {
-		margin-top: 120px;
-	}
-	body {
-		margin: 0;
-		padding: 0;
-		background-color: #EEEEEE;
-	}
-	.wide {
-		width: 100%
-	}
-	.center {
-		margin: auto;
-	}
-	.text_center {
-		text-align: center;
-	}
-	.nav {
-		display: block;
-		margin: 0;
-		padding: 0;
-		min-height: 100px;
-		height: 10%;
-		width: 100%;
-		position: fixed;
-		background-color: white;
-		z-index: 99;
-	}
-	.nav:hover {
-		opacity: 1;
-	}
-	.page {
-		height: 100%;
-		min-height: 600px;
-		margin-bottom: 130px;
-	}
-	.container {
-		width: 85%;
-		min-width: 500px;
-		margin: auto;
-		background-color: #FCFCFC;
-	}
-	h1 {
-		font-size: 3.0em;
-	}
-	h2 {
-		font-size: 2.5em;
-		margin: 30px;
-	}
-	h3 {
-		font-size: 1.7em;
-		margin: 10px;
-	}
-	h4 {
-		font-size: 1.2em;
-	}
-	p {
-		font-size: 1em;
-	}
-	.bold {
-		font-weight: bold;
-	}
-	.text-red {
-		color: red;
-	}
-	.image {
-		width: 100%;
-		margin-top: 5px;
-	}
-	.sh-image {
-		max-height: 190px;
-		margin-top: 5px;
-	}
-	.primary-button {
-		font-size: 1.5em;
-	}
-	.button-icon {
-		margin: 10px;
-	}
-	.main-footer {
-	  	border: 2px solid #d7d7d7;
-	  	background: #e7e7e7;
-	  	color: #757575;
-	  	font-size: 12px;
-	  	text-align: center;
-	  	padding: 40px 0;
-	  	position: relative;
-	  	margin-top: -3em;
-	  	width: 100%;
-	}
-	.equation{
-		text-align: center;
-	}
-	.caption{
-		text-align: center;
-		font-style: italic;
-	}
-	.offset_sp{
-		margin-left: 4%
-	}
-	.sidenav {
-	  height: 100%;
-	  width: 0;
-	  position: fixed;
-	  z-index: 999;
-	  top: 0;
-	  left: 0;
-	  background-color: #111;
-	  overflow-x: hidden;
-	  transition: 0.5s;
-	  padding-top: 60px;
-	}
+<script>
+    var events = document.getElementsByClassName("event");
+    window.onload = set;
+    function set(){
+        events[1].style.display = "none";
+        showDivs(slideIndex);  
+    }
+    var html = document.documentElement;
+    var height = html.clientHeight * 0.21;
+    function openNav() {
+        document.getElementById("mySidenav").style.height = "90%";
+        document.getElementById("mySidenav").style.top = "10%";
+        document.getElementById("background").style.filter += "blur(10px) grayscale(100%)";
+        document.getElementById("header").addEventListener("click", closeNav);
+        document.getElementById("header").removeEventListener("click", openNav);
+        document.getElementById("menu").style.top = height+"px";
+        events[0].style.display = "none";
+        events[1].style.display = "block";
+    }
+    function closeNav() {
+        document.getElementById("mySidenav").style.height = "20%";
+        document.getElementById("mySidenav").style.top = "80%";
+        document.getElementById("background").style.filter = "invert(20%)";
+        document.getElementById("header").addEventListener("click", openNav);
+        document.getElementById("header").removeEventListener("click", closeNav);
+        document.getElementById("menu").style.top = height+"px";
+        events[0].style.display = "block";
+        events[1].style.display = "none";
+    }
 
-	.sidenav a {
-	  padding: 8px 8px 8px 32px;
-	  text-decoration: none;
-	  color: #D1D1D1;
-	  display: block;
-	  transition: 0.3s;
-	}
+    function shade(n) {
+        document.getElementById("step"+n).style.filter = "blur(5px) grayscale(50%)";
+    }
+    var check = [true,true,true,true,true,true,true];
+    function unshade(n) {
+        if(check[n-1])
+            document.getElementById("step" + n).style.filter = "none";
+    }
 
-	.sidenav a:hover {
-	  color: #f1f1f1;
-	}
+    function move() {
+        document.getElementsByClassName("main")[0].style.marginTop = "0";
+        document.getElementsByClassName("main")[0].style.marginBottom = "1%";
+        document.getElementsByClassName("main")[1].style.marginTop = "2%";
+        document.getElementsByClassName("main")[1].style.marginBottom = "0";
+    }
+    function moveback() {
+        document.getElementsByClassName("main")[0].style.marginTop = "1%";
+        document.getElementsByClassName("main")[0].style.marginBottom = "0";
+        document.getElementsByClassName("main")[1].style.marginTop = "1%";
+        document.getElementsByClassName("main")[1].style.marginBottom = "1%";
+    }
 
-	.sidenav .closebtn {
-	  position: absolute;
-	  top: 0;
-	  right: 25px;
-	  font-size: 36px;
-	  padding: 0;
-	}
 
-	.sidenav .upbtn{
-		position: absolute;
-		top: 15px;
-		right: 60px;
-		font-size: 23px;
-	  	padding: 0;
-	}
+    var slideIndex = 1;
+    
 
-	@media screen and (max-height: 450px) {
-	  .sidenav {padding-top: 15px;}
-	  .sidenav a {font-size: 18px;}
-	}
+    function currentDiv(n) {
+        showDivs(slideIndex = n);
+    }
 
-	#menu_btn{
-		position: fixed;
-		z-index: 99;
-		top:20%;
-		left: 2%;
-		background-color: #ffffff;
-		border-radius: 3px;
-		width: 35px;
-		height: 35px;
-		cursor: pointer;
-	}
+    function showDivs(n) {
+        var i;
+ 
+        var x = document.getElementsByClassName("mySlides");
+        if (n > x.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = x.length }
+        for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";
+        }
+        for (i = 1; i <= check.length; i++) {
+            check[i - 1] = true;
+            unshade(i);
+//          document.getElementById("title").innerHTML = ;
+        }
 
-	#menu_btn span{
-		margin: 30%;
-	}
-</style>
-
-<script type="text/javascript">
-	$(window).scroll(function(){
-		var opa = Math.max(1 - $(window).scrollTop() / 250, 0) + 0.03;
-		if($(".nav").attr("opacity") != opa){
-  			$(".nav").css("opacity", opa);
-  		}
-  	});
-	$(".nav").mouseenter(function(){
-  		if($(".nav").attr("opacity") != 1){
-  			$(".nav").fadeTo(300, 1);
-  		}
-  	});
-  	$(".nav").mouseleave(function(){
-  		$(".nav").fadeTo(300, Math.max(1 - $(window).scrollTop() / 250, 0) + 0.03);
-  	});
-  	// $(".nav").click(function(){
-  	// 	$("html, body").animate({ scrollTop: 0 }, "slow");
-  	// });
-	function openNav() {
-	  document.getElementById("mySidenav").style.width = "250px";
-	}
-
-	function closeNav() {
-	  document.getElementById("mySidenav").style.width = "0";
-	}
-
-	// Select all links with hashes
-	$('a[href*="#"]')
-	  // Remove links that don't actually link to anything
-	  .not('[href="#"]')
-	  .not('[href="#0"]')
-	  .click(function(event) {
-	    // On-page links
-	    if (
-	      location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') 
-	      && 
-	      location.hostname == this.hostname
-	    ) {
-	      // Figure out element to scroll to
-	      var target = $(this.hash);
-	      target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-	      // Does a scroll target exist?
-	      if (target.length) {
-	        // Only prevent default if animation is actually gonna happen
-	        event.preventDefault();
-	        $('html, body').animate({
-	          scrollTop: target.offset().top
-	        }, 700, function() {
-	          // Callback after animation
-	          // Must change focus!
-	          // var $target = $(target);
-	          // $target.focus();
-	          // if ($target.is(":focus")) { // Checking if the target was focused
-	          //   return false;
-	          // } else {
-	          //   // $target.attr('tabindex','-1'); // Adding tabindex for elements not focusable
-	          //   $target.focus(); // Set focus again
-	          // };
-	        });
-	      }
-	    }
-	    closeNav();
-	  });
+        x[slideIndex - 1].style.display = "block";
+        shade(n);
+        check[n-1] = false;
+    }
 </script>
